@@ -7,7 +7,7 @@ public class Main {
         welcome();
         System.out.println("Would you like to Book a night or Exit?");
         System.out.println("[1] Book a night");
-        System.out.println("[0] Book a night");
+        System.out.println("[0] Exit");
         System.out.print("~> ");
         int userChoice = input.nextInt();
 
@@ -17,11 +17,17 @@ public class Main {
                 int inputSizeSelection = getSize(inputRoomSelection,input);
                 int priceofRoomSize = getPriceRoom(inputRoomSelection,inputSizeSelection);
                 System.out.println("PRICE = "+ priceofRoomSize); //TEST
+                            
+                //izzy
+                int nightofStay = getHowManyNights(input);
+
+                int totalPrice = priceofRoomSize * nightofStay;
+                
+                System.out.println("Total cost: " + totalPrice);
                 break;
         
             case 0:
                 System.exit(0);
-
             default:
                 break;
         }
@@ -112,6 +118,10 @@ public class Main {
         }
         return userChoicePrice;
     }
-}
-
     
+     private static int getHowManyNights(Scanner input) {
+        System.out.println("How many nights you will be staying?");
+        System.out.print("~> ");
+        return input.nextInt();
+    }
+}
