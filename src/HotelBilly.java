@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class HotelBilly {
@@ -504,6 +505,23 @@ public class HotelBilly {
 
         System.out.println(receipt);
     }
+       
+    //inputting the summary into file 
+       private static void fileTransaction(String customerInfo, String receipt) {
+        
+        try (FileWriter writer = new FileWriter("transaction_history.txt", true)) { 
+            writer.write(customerInfo + "\n");
+            writer.write(receipt + "\n");
+            writer.write("========================================================\n");
+            System.out.println("Transaction saved successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving the transaction.");
+            e.printStackTrace();
+        }
+       }
+
+        
+    
     private static void checkout(int roomType, int nights, int guests, Scanner input) {
         String name, email;
         String customerInfo;
