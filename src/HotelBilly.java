@@ -76,10 +76,11 @@ public class HotelBilly {
             System.out.println(Green + "||                                                  ||" + Reset);
             System.out.println(Green + "||    " + Reset + "Would you like to Book a night or Exit?" + Reset + Green + "       ||" + Reset);
             System.out.println(Green + "||    " + Reset + Magenta + "[1]" + Reset + Gray + "   Book a night" + Reset + Green + "                            ||" + Reset);
+            System.out.println(Green + "||    " + Reset + Magenta + "[2]" + Reset + Gray + "   View transactions by name" + Reset + Green + "               ||" + Reset);
             System.out.println(Green + "||    " + Reset + Magenta + "[0]" + Reset + Gray + "   Exit" + Reset + Green + "                                    ||" + Reset);
             System.out.println(Green + "||                                                  ||" + Reset);
             System.out.println(Green + "++==================================================++" + Reset);
-            System.out.println(Italic + Gray + "           Please select an option (1 or 0)           " + Reset);
+            System.out.println(Italic + Gray + "           Please select an option (0 - 2)           " + Reset);
             System.out.println(Green + "O----------------------------------------------------O" + Reset);
             System.out.print("          Input Number Here: ");
 
@@ -90,6 +91,11 @@ public class HotelBilly {
                     case 1:
                         System.out.println();
                         displayOptions(input); // Where everything happens
+                        break;
+                    case 2:
+                        System.out.println();
+                    input.nextLine();
+                        viewTransByName(names, customerInformations, transactionsReceipt, input);
                         break;
                     case 0:
                         System.out.println();
@@ -459,6 +465,7 @@ public class HotelBilly {
 
     // In: Room Type, number of Nights, number of Guests, Base Price of the Room
     // Out: void (Prints the receipt)
+    static ArrayList <String> transactionsReceipt =new ArrayList<String>();
     private static void displayReceipt(String RoomType, String RoomOcc, int NightCount, int GuestCount, int roomBasePrice) {
         String receipt;
         final int initialPrice = roomBasePrice * NightCount;
@@ -493,7 +500,7 @@ public class HotelBilly {
                 + String.format("||" + Reset + "   TOTAL BILL       : %-28.2f" + Green + "||\n", total)
                 + "||                                                  ||\n"
                 + "++==================================================++\n";
-
+        transactionsReceipt.add(receipt);
         System.out.println(receipt);
     }
 
@@ -511,9 +518,58 @@ public class HotelBilly {
             e.printStackTrace();
         }
     }
+    private static void viewTransByName(ArrayList<String> names,ArrayList<String> customerInformations, 
+    ArrayList<String> transactionsReceipt, Scanner input){
+        
+        if (names.isEmpty()) {
+                System.out.println(Green + "||" + Reset + "           No transactions found in records.         " + Green + "||" + Reset);
+                System.out.println(Green + "++==================================================++" + Reset);
+                return;//CUT LOOPING
+            }
+            while(true){    
+                try {
+                    System.out.print("     Enter name to view (or 'exit' to return): ");
+                    String searchName = input.nextLine();
+                    
+                    if (searchName.equalsIgnoreCase("exit")) {
+                        return;
+                    }
+                
+                
+                boolean found = false;
+                for (int i = 0; i < names.size(); i++) {
+                    if (searchName.equalsIgnoreCase(names.get(i))) {
+                        found = true;
+                        System.out.println(Green + "++==================================================++" + Reset);
+                        System.out.println(Green + "||" + Reset + Bold + "               Transaction #" + (i+1) + "                 " + Green + "||" + Reset);
+                        System.out.println(Green + "++==================================================++" + Reset);
+                        System.out.println(customerInformations.get(i));
+                        System.out.println(transactionsReceipt.get(i));
+                        System.out.println(Green + "++==================================================++" + Reset);
+                    }
+                }
+                
+                if (found==false) {
+                    System.out.println(Green + "++==================================================++" + Reset);
+                    System.out.println(Green + "||" + Reset + "     No transactions found for: " + searchName + "     " + Green + "||" + Reset);
+                    System.out.println(Green + "++==================================================++" + Reset);
+                }
+            }catch (Exception e) {
+                System.out.println(Green + "++==================================================++" + Reset);
+                System.out.println(Green + "||" + Reset + Red + Bold + "  An error occurred: " + e.getMessage() + Reset + Green + "  ||" + Reset);
+                System.out.println(Green + "++==================================================++" + Reset);
+                input.nextLine(); // Clear buffer in case of error
+            }
+        }
+    }
 
+
+
+       
     // In: Room Type, number of Nights, number of Guests, Scanner
     // Out: void (Gets the user information, and then prints it)
+    static ArrayList <String> customerInformations =new ArrayList<String>(); 
+    static ArrayList <String> names =new ArrayList<String>(); 
     private static void checkout(String RoomType, String RoomOcc, int NightCount, int GuestCount, Scanner input) {
         final int roomBasePrice = roomBasePriceSelect(RoomType, RoomOcc);
         String name, email, customerInfo, contactLength;
@@ -531,7 +587,7 @@ public class HotelBilly {
 
         System.out.print("     Enter your Name: "); //No possible errors
         name = input.nextLine();
-
+        names.add(name);
         while (true) {
             System.out.print("     Enter your Age: "); //Must be 18 years old and above
             try {
@@ -587,7 +643,7 @@ public class HotelBilly {
                 + String.format("||" + Reset + "  Email      : %-35s" + Green + "||\n", email)
                 + String.format("||" + Reset + "  Contact No.: %-35s" + Green + "||\n", contact)
                 + "||                                                  ||";
-
+        customerInformations.add(customerInfo);
         System.out.println(customerInfo);
         displayReceipt(RoomType, RoomOcc, NightCount, GuestCount, roomBasePrice);
 
@@ -630,6 +686,7 @@ public class HotelBilly {
                     System.out.println();
                     break;
             }
+        
         }
-    }
-}
+    }   
+} 
