@@ -15,14 +15,14 @@ public class FileStorage {
         // If yes, do nothing
         // If no, create it
         File txtFile = new File(TRANSACTION_HISTORY_FILE_LOCATION);
-        if(!txtFile.exists()){
-            try{
-                if(txtFile.createNewFile()){
+        if (!txtFile.exists()) {
+            try {
+                if (txtFile.createNewFile()) {
                     System.out.println("               File has been created");
-                }else {
+                } else {
                     System.out.println("               Failed to create");
                 }
-            }catch(IOException e) {
+            } catch (IOException e) {
                 System.out.println("           An error occurred while creating the file.");
                 e.printStackTrace();
             }

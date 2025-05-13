@@ -49,9 +49,10 @@ public class TransactionManager {
         return TransactionID;
     }
     public static void findByTransactionID(int transactionID) {
+        int i;
         boolean found = false;
 
-        for (int i = 0; i < TransactionID.size(); i++) {
+        for (i = 0; i < TransactionID.size(); i++) {
             if (TransactionID.get(i) == transactionID) {
                 printReceipt(i);
                 found = true;
@@ -71,9 +72,10 @@ public class TransactionManager {
         return RoomType;
     }
     public static void findByRoomType(String roomType) {
+        int i;
         boolean found = false;
 
-        for (int i = 0; i < RoomType.size(); i++) {
+        for (i = 0; i < RoomType.size(); i++) {
             if (RoomType.get(i).equalsIgnoreCase(roomType)) {
                 printReceipt(i);
                 found = true;
@@ -94,9 +96,10 @@ public class TransactionManager {
     }
     // FIND ROOM TYPE AND OCCUPANCY
     public static void findByRoomTypeOcc(String roomType, String roomOcc) {
+        int i;
         boolean found = false;
 
-        for (int i = 0; i < RoomType.size(); i++) {
+        for (i = 0; i < RoomType.size(); i++) {
             if (RoomType.get(i).equalsIgnoreCase(roomType) && RoomOcc.get(i).equalsIgnoreCase(roomOcc)) {
                 printReceipt(i);
                 found = true;
@@ -174,11 +177,13 @@ public class TransactionManager {
 
     // FIND ALL
     public static void findAll() {
+        int i;
+
         if (TransactionID.isEmpty()) {
             errorNoTransactionFound();
         }
 
-        for (int i = 0; i < TransactionID.size(); i++) {
+        for (i = 0; i < TransactionID.size(); i++) {
             printReceipt(i);
         }
     }
