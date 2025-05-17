@@ -160,6 +160,7 @@ public class HotelBillyApp {
 
     // The 5 main stages of the program
     private static void displayOptions(Scanner input) {
+        addCustomerInfo(input);
         setRoomType(input); // First Stage
         setGuests(getRoomType().getLast(), getRoomOcc().getLast(), input); // Second Stage
         setNights(input); // Third Stage
@@ -497,7 +498,7 @@ public class HotelBillyApp {
         System.out.println(GREEN + "++==================================================++\n" + RESET);
     }
 
-    private static void addCustomerInfo() {
+    private static void addCustomerInfo(Scanner input) {
         final int MIN_AGE = 18;
         final int MAX_AGE = 200;
         String name, email, customerInfo, contact;
