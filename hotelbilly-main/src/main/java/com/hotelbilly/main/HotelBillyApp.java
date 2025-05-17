@@ -177,6 +177,9 @@ public class HotelBillyApp {
             System.out.println();
             System.out.println(GREEN + "++==================================================++" + RESET);
             System.out.println(GREEN + "||" + RESET + BOLD + "              " + "Select your Room Type" + "               " + RESET + GREEN + "||" + RESET);
+            System.out.println(GREEN + "||" + RESET + " " + ITALIC + GRAY + "Note: For every extra guests, 10% charge applies" + RESET + " " + GREEN + "||" + RESET);
+            System.out.println(GREEN + "||" + RESET + "       " + ITALIC + GRAY + "Single Occupancy: Starts from 2nd guest" + RESET + "    " + GREEN + "||" + RESET);
+            System.out.println(GREEN + "||" + RESET + "       " + ITALIC + GRAY + "Double Occupancy: Starts from 3rd guest" + RESET + "    " + GREEN + "||" + RESET);
             System.out.println(GREEN + "||==================================================||" + RESET);
             System.out.println(GREEN + "||                                                  ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + BOLD + "[1]" + RESET + GRAY + BOLD + " Standard - Single Occupancy" + RESET + GREEN + "               ||" + RESET);
@@ -494,19 +497,11 @@ public class HotelBillyApp {
         System.out.println(GREEN + "++==================================================++\n" + RESET);
     }
 
-    // In: Room Type, number of Nights, number of Guests, Scanner
-    // Out: void (Gets the user information, and then prints it)
-    private static void checkout(String RoomType, String RoomOcc, int NightCount, int GuestCount, Scanner input) {
+    private static void addCustomerInfo() {
         final int MIN_AGE = 18;
         final int MAX_AGE = 200;
-        final int ROOMBASEPRICE = roomBasePriceSelect(RoomType, RoomOcc);
         String name, email, customerInfo, contact;
         int age;
-
-        System.out.println();
-        System.out.println(GREEN + "::::::::::::::::::::::::::::::::::::::::::::::::::::::" + RESET);
-        System.out.println(GREEN + "::" + RESET + "               " + BOLD + "Checkout Information" + RESET + "               " + GREEN + "::" + RESET);
-        System.out.println(GREEN + "::::::::::::::::::::::::::::::::::::::::::::::::::::::" + RESET);
         System.out.println(GREEN + "------------------------------------------------------" + RESET);
         System.out.println(" Please input your information to proceed to checkout ");
         System.out.println(GREEN + "------------------------------------------------------" + RESET);
@@ -561,6 +556,17 @@ public class HotelBillyApp {
                 + "||                                                  ||";
 
         System.out.println(customerInfo);
+    }
+
+    // In: Room Type, number of Nights, number of Guests, Scanner
+    // Out: void (Gets the user information, and then prints it)
+    private static void checkout(String RoomType, String RoomOcc, int NightCount, int GuestCount, Scanner input) {
+        final int ROOMBASEPRICE = roomBasePriceSelect(RoomType, RoomOcc);
+
+        System.out.println();
+        System.out.println(GREEN + "::::::::::::::::::::::::::::::::::::::::::::::::::::::" + RESET);
+        System.out.println(GREEN + "::" + RESET + "               " + BOLD + "Checkout Information" + RESET + "               " + GREEN + "::" + RESET);
+        System.out.println(GREEN + "::::::::::::::::::::::::::::::::::::::::::::::::::::::" + RESET);
         displayReceipt(RoomType, RoomOcc, NightCount, GuestCount, ROOMBASEPRICE);
 
         while (true) {
