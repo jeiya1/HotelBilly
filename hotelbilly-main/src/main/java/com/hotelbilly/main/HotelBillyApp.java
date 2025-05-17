@@ -48,7 +48,6 @@ public class HotelBillyApp {
             System.out.println(GREEN + "++==================================================++" + RESET);
             System.out.println(GREEN + "||             " + RESET + BOLD + YELLOW + "Welcome to Hotel De Luna" + RESET + GREEN + "             ||" + RESET);
             System.out.println(GREEN + "||                                                  ||" + RESET);
-            System.out.println(GREEN + "||    " + RESET + "Would you like to Book a night or Exit?" + RESET + GREEN + "       ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + "[1]" + RESET + GRAY + "   Book a night" + RESET + GREEN + "                            ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + "[2]" + RESET + GRAY + "   View Transactions" + RESET + GREEN + "                       ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + "[0]" + RESET + GRAY + "   Exit" + RESET + GREEN + "                                    ||" + RESET);
