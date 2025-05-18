@@ -160,13 +160,71 @@ public class HotelBillyApp {
 
     // The 5 main stages of the program
     private static void displayOptions(Scanner input) {
+        final int MIN_AGE = 18;
+        final int MAX_AGE = 200;
+        String name, email, customerInfo, contact;
+        int age;
+
+        System.out.println(GREEN + "------------------------------------------------------" + RESET);
+        System.out.println(" Please input your information to proceed to checkout ");
+        System.out.println(GREEN + "------------------------------------------------------" + RESET);
+        System.out.println();
+        input.nextLine();
+        
+        System.out.print("     Enter your Name: "); //No possible errors
+        name = input.nextLine();
+
+        while (true) {
+            System.out.print("     Enter your Age: "); //Must be 18 years old and above
+            try {
+                age = input.nextInt();
+                input.nextLine();
+                if (age < MIN_AGE || age > MAX_AGE) {
+                    errorAgeRestrictiontxt();
+                    System.out.println();
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                errorTypetxt();
+                System.out.println();
+                input.nextLine();
+            }
+        }
+        while (true) {
+            System.out.print("     Enter your Contact Number: ");
+            contact = input.nextLine();
+            if (isValidContact(contact)) {
+                break;
+            }
+        }
+
+        System.out.print("     Enter your Email: "); //No possible errors
+        email = input.nextLine();
+
+        customerInfo = GREEN + "++==================================================++\n"
+                + "\n"
+                + "\n"
+                + "++==================================================++\n"
+                + "||                                                  ||\n"
+                + "||" + RESET + "                 " + BOLD + "Summary Details" + RESET + "                  " + GREEN + "||\n"
+                + "||                                                  ||\n"
+                + "++==================================================++\n"
+                + "||" + RESET + "                " + BOLD + "Customer Information " + RESET + "             " + GREEN + "||\n"
+                + "++==================================================++\n"
+                + "||                                                  ||\n"
+                + String.format("||" + RESET + "  Name       : %-35s" + GREEN + "||\n", name)
+                + String.format("||" + RESET + "  Age        : %-35s" + GREEN + "||\n", age + " year old")
+                + String.format("||" + RESET + "  Email      : %-35s" + GREEN + "||\n", email)
+                + String.format("||" + RESET + "  Contact No.: %-35s" + GREEN + "||\n", contact)
+                + "||                                                  ||";
+
         setRoomType(input); // First Stage
         setGuests(getRoomType().getLast(), getRoomOcc().getLast(), input); // Second Stage
         setNights(input); // Third Stage
 
         displaySelection(getRoomType().getLast(), getRoomOcc().getLast(), getNightCount().getLast(), getGuestCount().getLast()); // Fourth Stage
-
-        checkout(getRoomType().getLast(), getRoomOcc().getLast(), getNightCount().getLast(), getGuestCount().getLast(), input); // Fifth Stage
+        checkout(name, email, customerInfo, contact, age, getRoomType().getLast(), getRoomOcc().getLast(), getNightCount().getLast(), getGuestCount().getLast(), input); // Fifth Stage
     }
 
     // In: Scanner
@@ -177,6 +235,9 @@ public class HotelBillyApp {
             System.out.println();
             System.out.println(GREEN + "++==================================================++" + RESET);
             System.out.println(GREEN + "||" + RESET + BOLD + "              " + "Select your Room Type" + "               " + RESET + GREEN + "||" + RESET);
+            System.out.println(GREEN + "||" + RESET + " " + ITALIC + GRAY + "Note: For every extra guests, 10% charge applies" + RESET + " " + GREEN + "||" + RESET);
+            System.out.println(GREEN + "||" + RESET + "       " + ITALIC + GRAY + "Single Occupancy: Starts from 2nd guest" + RESET + "    " + GREEN + "||" + RESET);
+            System.out.println(GREEN + "||" + RESET + "       " + ITALIC + GRAY + "Double Occupancy: Starts from 3rd guest" + RESET + "    " + GREEN + "||" + RESET);
             System.out.println(GREEN + "||==================================================||" + RESET);
             System.out.println(GREEN + "||                                                  ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + BOLD + "[1]" + RESET + GRAY + BOLD + " Standard - Single Occupancy" + RESET + GREEN + "               ||" + RESET);
@@ -496,70 +557,13 @@ public class HotelBillyApp {
 
     // In: Room Type, number of Nights, number of Guests, Scanner
     // Out: void (Gets the user information, and then prints it)
-    private static void checkout(String RoomType, String RoomOcc, int NightCount, int GuestCount, Scanner input) {
-        final int MIN_AGE = 18;
-        final int MAX_AGE = 200;
+    private static void checkout(String name, String email, String customerInfo, String contact, int age, String RoomType, String RoomOcc, int NightCount, int GuestCount, Scanner input) {
         final int ROOMBASEPRICE = roomBasePriceSelect(RoomType, RoomOcc);
-        String name, email, customerInfo, contact;
-        int age;
 
         System.out.println();
         System.out.println(GREEN + "::::::::::::::::::::::::::::::::::::::::::::::::::::::" + RESET);
         System.out.println(GREEN + "::" + RESET + "               " + BOLD + "Checkout Information" + RESET + "               " + GREEN + "::" + RESET);
         System.out.println(GREEN + "::::::::::::::::::::::::::::::::::::::::::::::::::::::" + RESET);
-        System.out.println(GREEN + "------------------------------------------------------" + RESET);
-        System.out.println(" Please input your information to proceed to checkout ");
-        System.out.println(GREEN + "------------------------------------------------------" + RESET);
-        System.out.println();
-
-        System.out.print("     Enter your Name: "); //No possible errors
-        name = input.nextLine();
-
-        while (true) {
-            System.out.print("     Enter your Age: "); //Must be 18 years old and above
-            try {
-                age = input.nextInt();
-                input.nextLine();
-                if (age < MIN_AGE || age > MAX_AGE) {
-                    errorAgeRestrictiontxt();
-                    System.out.println();
-                } else {
-                    break;
-                }
-            } catch (InputMismatchException e) {
-                errorTypetxt();
-                System.out.println();
-                input.nextLine();
-            }
-        }
-        while (true) {
-            System.out.print("     Enter your Contact Number: ");
-            contact = input.nextLine();
-            if (isValidContact(contact)) {
-                break;
-            }
-        }
-
-        System.out.print("     Enter your Email: "); //No possible errors
-        email = input.nextLine();
-
-        customerInfo = GREEN + "++==================================================++\n"
-                + "\n"
-                + "\n"
-                + "++==================================================++\n"
-                + "||                                                  ||\n"
-                + "||" + RESET + "                 " + BOLD + "Summary Details" + RESET + "                  " + GREEN + "||\n"
-                + "||                                                  ||\n"
-                + "++==================================================++\n"
-                + "||" + RESET + "                " + BOLD + "Customer Information " + RESET + "             " + GREEN + "||\n"
-                + "++==================================================++\n"
-                + "||                                                  ||\n"
-                + String.format("||" + RESET + "  Name       : %-35s" + GREEN + "||\n", name)
-                + String.format("||" + RESET + "  Age        : %-35s" + GREEN + "||\n", age + " year old")
-                + String.format("||" + RESET + "  Email      : %-35s" + GREEN + "||\n", email)
-                + String.format("||" + RESET + "  Contact No.: %-35s" + GREEN + "||\n", contact)
-                + "||                                                  ||";
-
         System.out.println(customerInfo);
         displayReceipt(RoomType, RoomOcc, NightCount, GuestCount, ROOMBASEPRICE);
 
