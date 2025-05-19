@@ -166,7 +166,7 @@ public class HotelBillyApp {
         int age;
 
         System.out.println(GREEN + "------------------------------------------------------" + RESET);
-        System.out.println(" Please input your information to proceed to checkout ");
+        System.out.println(        "   Please enter your personal information to proceed  ");
         System.out.println(GREEN + "------------------------------------------------------" + RESET);
         System.out.println();
         input.nextLine();
