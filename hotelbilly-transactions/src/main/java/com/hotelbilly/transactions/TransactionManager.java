@@ -1,9 +1,10 @@
 package com.hotelbilly.transactions;
 
-import static com.hotelbilly.common.Constants.*;
-
-import java.io.File;
 import java.util.ArrayList;
+
+import static com.hotelbilly.common.Constants.BOLD;
+import static com.hotelbilly.common.Constants.RESET;
+import static com.hotelbilly.common.Constants.errorNoTransactionFound;
 
 public class TransactionManager {
     // TODO: Replace with proper constructors and objects (after knowing it was allowed in Acitivity 5)
@@ -23,19 +24,15 @@ public class TransactionManager {
     // ***RECEIPT***
     private static void printReceipt(int index) {
         System.out.println();
-        System.out.println("========================================");
-        System.out.printf("Transaction ID : %s%n", TransactionID.get(index));
-        System.out.println("----------------------------------------");
-        System.out.printf("Room Type      : %s%n", RoomType.get(index));
-        System.out.printf("Occupancy      : %s%n", RoomOcc.get(index));
-        System.out.printf("Nights Stayed  : %s%n", NightCount.get(index));
-        System.out.printf("Guests         : %s%n", GuestCount.get(index));
-        System.out.println("----------------------------------------");
-        System.out.printf("Name           : %s%n", Name.get(index));
-        System.out.printf("Age            : %s%n", Age.get(index));
-        System.out.printf("Contact No.    : %s%n", Contact.get(index));
-        System.out.printf("Email Address  : %s%n", Email.get(index));
-        System.out.println("========================================");
+        System.out.println(BOLD+"======================================================================================================================================="+RESET);
+        System.out.printf(BOLD+"| %-12s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
+                          "Transaction ID", "Room Type", "Occupancy", "Nights Stayed", "Guests", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"======================================================================================================================================="+RESET);
+        System.out.printf("| %-14s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
+                              TransactionID.get(index), RoomType.get(index), RoomOcc.get(index), NightCount.get(index), GuestCount.get(index),
+                              Name.get(index), Age.get(index), Contact.get(index), Email.get(index));
+
+        System.out.println(BOLD+"======================================================================================================================================="+RESET);
         System.out.println();
     }
 
@@ -183,8 +180,18 @@ public class TransactionManager {
             errorNoTransactionFound();
         }
 
-        for (i = 0; i < TransactionID.size(); i++) {
-            printReceipt(i);
+        System.out.println();
+        System.out.println(BOLD+"======================================================================================================================================="+RESET);
+        System.out.printf(BOLD+"| %-12s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
+                        "Transaction ID", "Room Type", "Occupancy", "Nights Stayed", "Guests", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"======================================================================================================================================="+RESET);
+        for ( i = 0; i < TransactionID.size(); i++) {
+            System.out.printf("| %-14s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
+                            TransactionID.get(i), RoomType.get(i), RoomOcc.get(i), NightCount.get(i), GuestCount.get(i),
+                            Name.get(i), Age.get(i), Contact.get(i), Email.get(i));
+            System.out.println("______________________________________________________________________________________________________________________________________");                 
         }
+
+        System.out.println("=======================================================================================================================================");
     }
 }

@@ -1,11 +1,44 @@
 package com.hotelbilly.main;
 
-import static com.hotelbilly.common.Constants.*;
-import static com.hotelbilly.transactions.TransactionManager.*;
-import com.hotelbilly.file.FileStorage;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static com.hotelbilly.common.Constants.BLUE;
+import static com.hotelbilly.common.Constants.BOLD;
+import static com.hotelbilly.common.Constants.CYAN;
+import static com.hotelbilly.common.Constants.GRAY;
+import static com.hotelbilly.common.Constants.GREEN;
+import static com.hotelbilly.common.Constants.INVERT;
+import static com.hotelbilly.common.Constants.ITALIC;
+import static com.hotelbilly.common.Constants.MAGENTA;
+import static com.hotelbilly.common.Constants.RED;
+import static com.hotelbilly.common.Constants.RESET;
+import static com.hotelbilly.common.Constants.YELLOW;
+import static com.hotelbilly.common.Constants.errorAgeRestrictiontxt;
+import static com.hotelbilly.common.Constants.errorBookingExit;
+import static com.hotelbilly.common.Constants.errorContactRestrictiontxt;
+import static com.hotelbilly.common.Constants.errorRangetxt;
+import static com.hotelbilly.common.Constants.errorTypetxt;
+import static com.hotelbilly.common.Constants.welcome;
+import com.hotelbilly.file.FileStorage;
+import static com.hotelbilly.transactions.TransactionManager.addAge;
+import static com.hotelbilly.transactions.TransactionManager.addContact;
+import static com.hotelbilly.transactions.TransactionManager.addEmail;
+import static com.hotelbilly.transactions.TransactionManager.addGuestCount;
+import static com.hotelbilly.transactions.TransactionManager.addName;
+import static com.hotelbilly.transactions.TransactionManager.addNightCount;
+import static com.hotelbilly.transactions.TransactionManager.addRoomOcc;
+import static com.hotelbilly.transactions.TransactionManager.addRoomType;
+import static com.hotelbilly.transactions.TransactionManager.addTransactionID;
+import static com.hotelbilly.transactions.TransactionManager.findAll;
+import static com.hotelbilly.transactions.TransactionManager.findByName;
+import static com.hotelbilly.transactions.TransactionManager.findByRoomType;
+import static com.hotelbilly.transactions.TransactionManager.findByRoomTypeOcc;
+import static com.hotelbilly.transactions.TransactionManager.findByTransactionID;
+import static com.hotelbilly.transactions.TransactionManager.getGuestCount;
+import static com.hotelbilly.transactions.TransactionManager.getNightCount;
+import static com.hotelbilly.transactions.TransactionManager.getRoomOcc;
+import static com.hotelbilly.transactions.TransactionManager.getRoomType;
 
 public class HotelBillyApp {
     private static final int GUEST_NO_DISCOUNT_THRESHOLD = 3;
@@ -223,7 +256,6 @@ public class HotelBillyApp {
         setGuests(getRoomType().getLast(), getRoomOcc().getLast(), input); // Second Stage
         setNights(input); // Third Stage
 
-        displaySelection(getRoomType().getLast(), getRoomOcc().getLast(), getNightCount().getLast(), getGuestCount().getLast()); // Fourth Stage
         checkout(name, email, customerInfo, contact, age, getRoomType().getLast(), getRoomOcc().getLast(), getNightCount().getLast(), getGuestCount().getLast(), input); // Fifth Stage
     }
 
@@ -495,23 +527,6 @@ public class HotelBillyApp {
 
     // In: Room Type, number of Nights, number of Guests
     // Out: void (Prints the room selection of the user)
-    private static void displaySelection(String RoomType, String RoomOcc, int NightCount, int GuestCount) {
-        final int ROOMBASEPRICE = roomBasePriceSelect(RoomType, RoomOcc);
-        final float TOTAL_PRICE = finalCompute(RoomType, RoomOcc ,NightCount, GuestCount, ROOMBASEPRICE);
-        System.out.println(GREEN + "++==================================================++" + RESET);
-        System.out.println(GREEN + "||                                                  ||" + RESET);
-        System.out.println(GREEN + "||" + RESET + "                 " + BOLD + "Booking Summary" + RESET + "                  " + GREEN + "||" + RESET);
-        System.out.println(GREEN + "||                                                  ||" + RESET);
-        System.out.println(GREEN + "++==================================================++" + RESET);
-        System.out.println(GREEN + "||                                                  ||" + RESET);
-        System.out.printf(GREEN + "||" + RESET + "   ROOM TYPE        : %-28s" + GREEN + "||" + RESET + "%n",RoomType);
-        System.out.printf(GREEN + "||" + RESET + "   OCCUPANCY SIZE   : %-28s" + GREEN + "||" + RESET + "%n", RoomOcc);
-        System.out.printf(GREEN + "||" + RESET + "   GUESTS           : %-28d" + GREEN + "||" + RESET + "%n", GuestCount);
-        System.out.printf(GREEN + "||" + RESET + "   NUMBER OF NIGHTS : %-28d" + GREEN + "||" + RESET + "%n", NightCount);
-        System.out.printf(GREEN + "||" + RESET + "   Total Bill       : %-28.2f" + GREEN + "||" + RESET + "%n", TOTAL_PRICE);
-        System.out.println(GREEN + "||                                                  ||" + RESET);
-        System.out.println(GREEN + "++==================================================++" + RESET);
-    }
 
     // In: Room Type, number of Nights, number of Guests, Base Price of the Room
     // Out: void (Prints the receipt)
