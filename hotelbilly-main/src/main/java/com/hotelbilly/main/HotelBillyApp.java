@@ -1,44 +1,11 @@
 package com.hotelbilly.main;
 
+import static com.hotelbilly.common.Constants.*;
+import static com.hotelbilly.transactions.TransactionManager.*;
+import com.hotelbilly.file.FileStorage;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import static com.hotelbilly.common.Constants.BLUE;
-import static com.hotelbilly.common.Constants.BOLD;
-import static com.hotelbilly.common.Constants.CYAN;
-import static com.hotelbilly.common.Constants.GRAY;
-import static com.hotelbilly.common.Constants.GREEN;
-import static com.hotelbilly.common.Constants.INVERT;
-import static com.hotelbilly.common.Constants.ITALIC;
-import static com.hotelbilly.common.Constants.MAGENTA;
-import static com.hotelbilly.common.Constants.RED;
-import static com.hotelbilly.common.Constants.RESET;
-import static com.hotelbilly.common.Constants.YELLOW;
-import static com.hotelbilly.common.Constants.errorAgeRestrictiontxt;
-import static com.hotelbilly.common.Constants.errorBookingExit;
-import static com.hotelbilly.common.Constants.errorContactRestrictiontxt;
-import static com.hotelbilly.common.Constants.errorRangetxt;
-import static com.hotelbilly.common.Constants.errorTypetxt;
-import static com.hotelbilly.common.Constants.welcome;
-import com.hotelbilly.file.FileStorage;
-import static com.hotelbilly.transactions.TransactionManager.addAge;
-import static com.hotelbilly.transactions.TransactionManager.addContact;
-import static com.hotelbilly.transactions.TransactionManager.addEmail;
-import static com.hotelbilly.transactions.TransactionManager.addGuestCount;
-import static com.hotelbilly.transactions.TransactionManager.addName;
-import static com.hotelbilly.transactions.TransactionManager.addNightCount;
-import static com.hotelbilly.transactions.TransactionManager.addRoomOcc;
-import static com.hotelbilly.transactions.TransactionManager.addRoomType;
-import static com.hotelbilly.transactions.TransactionManager.addTransactionID;
-import static com.hotelbilly.transactions.TransactionManager.findAll;
-import static com.hotelbilly.transactions.TransactionManager.findByName;
-import static com.hotelbilly.transactions.TransactionManager.findByRoomType;
-import static com.hotelbilly.transactions.TransactionManager.findByRoomTypeOcc;
-import static com.hotelbilly.transactions.TransactionManager.findByTransactionID;
-import static com.hotelbilly.transactions.TransactionManager.getGuestCount;
-import static com.hotelbilly.transactions.TransactionManager.getNightCount;
-import static com.hotelbilly.transactions.TransactionManager.getRoomOcc;
-import static com.hotelbilly.transactions.TransactionManager.getRoomType;
 
 public class HotelBillyApp {
     private static final int GUEST_NO_DISCOUNT_THRESHOLD = 3;
@@ -136,16 +103,16 @@ public class HotelBillyApp {
             System.out.println(GREEN + "||    " + RESET + MAGENTA + "[3]" + RESET + GRAY + "   Room Type" + RESET + GREEN + "                               ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + "[4]" + RESET + GRAY + "   Room Type and Occupancy" + RESET + GREEN + "                 ||" + RESET);
             System.out.println(GREEN + "||    " + RESET + MAGENTA + "[5]" + RESET + GRAY + "   Overall Transactions" + RESET + GREEN + "                    ||" + RESET);
-            System.out.println(GREEN + "||    " + RESET + MAGENTA + "[0]" + RESET + GRAY + "   Go Back" + RESET + GREEN + "                                 ||" + RESET);
+            System.out.println(GREEN + "||    " + RESET + MAGENTA + "[0]" + RESET + GRAY + "   Go Back to Main Menu" + RESET + GREEN + "                    ||" + RESET);
             System.out.println(GREEN + "++==================================================++" + RESET);
             System.out.println(ITALIC + GRAY + "           Please select an option (0 - 5)           " + RESET);
             System.out.println(GREEN + "O----------------------------------------------------O" + RESET);
-            System.out.print("          Input Number Here: ");
-            userChoice = input.nextInt();
-            input.nextLine();
-            System.out.println(GREEN + "O----------------------------------------------------O" + RESET);
 
             try {
+                System.out.print("          Input Number Here: ");
+                userChoice = input.nextInt();
+                input.nextLine();
+                System.out.println(GREEN + "O----------------------------------------------------O" + RESET);
                 switch (userChoice) {
                     case 1:
                         System.out.print("          Enter name to view: ");
@@ -599,11 +566,10 @@ public class HotelBillyApp {
                     System.out.println(GREEN + "++==================================================++" + RESET);
                     System.out.println(GREEN + "||                                                  ||" + RESET);
                     System.out.println(GREEN + "||" + RESET + BOLD + "                     Thank you " + RESET + GREEN + "                   ||" + RESET);
-                    System.out.println(GREEN + "||" + RESET + BOLD + "      For booking your stay at " + YELLOW + "HOTEL DE LUNA!" + RESET + " " + RESET + GREEN + "    ||" + RESET);
+                    System.out.println(GREEN + "||" + RESET + BOLD + "           For booking at " + YELLOW + "HOTEL DE LUNA!" + RESET + " " + RESET + GREEN + "         ||" + RESET);
                     System.out.println(GREEN + "||" + RESET + CYAN + "           Returning to the main menu...          " + RESET + GREEN + "||" + RESET);
                     System.out.println(GREEN + "||                                                  ||" + RESET);
                     System.out.println(GREEN + "++==================================================++" + RESET);
-                    System.out.println(BLUE + "\n******************************************************" + RESET);
 
                     addTransactionID(FileStorage.ReadTransactionID());
                     addName(name);
@@ -613,6 +579,9 @@ public class HotelBillyApp {
 
                     FileStorage.AppendTransaction();
 
+                    System.out.print("Press any key to go back to the main menu...");
+                    input.nextLine();
+
                     return;
                 case "no":
                     System.out.println(GREEN + "++==================================================++" + RESET);
@@ -621,7 +590,10 @@ public class HotelBillyApp {
                     System.out.println(GREEN + "||" + RESET + CYAN + "           Returning to the main menu...          " + RESET + GREEN + "||" + RESET);
                     System.out.println(GREEN + "||                                                  ||" + RESET);
                     System.out.println(GREEN + "++==================================================++" + RESET);
-                    System.out.println(BLUE + "\n******************************************************" + RESET);
+
+                    System.out.print("Press any key to go back to the main menu...");
+                    input.nextLine();
+
                     return;
                 default:
                     errorBookingExit();

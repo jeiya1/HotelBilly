@@ -23,20 +23,9 @@ public class TransactionManager {
 
     // ***RECEIPT***
     private static void printReceipt(int index) {
-        System.out.println();
-        System.out.println(BOLD+"======================================================================================================================================="+RESET);
-        System.out.printf(BOLD+"| %-12s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
-                          "Transaction ID", "Room Type", "Occupancy", "Nights Stayed", "Guests", "Name", "Age", "Contact No.", "Email"+RESET);
-        System.out.println(BOLD+"======================================================================================================================================="+RESET);
-        System.out.printf("| %-14s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
-                              TransactionID.get(index), RoomType.get(index), RoomOcc.get(index), NightCount.get(index), GuestCount.get(index),
-                              Name.get(index), Age.get(index), Contact.get(index), Email.get(index));
-
-        System.out.println(BOLD+"======================================================================================================================================="+RESET);
-        System.out.println();
+        System.out.printf("| %-14s | %-40s | %-5s | %-13s | %-30s %n",
+               TransactionID.get(index), Name.get(index), Age.get(index), Contact.get(index), Email.get(index));
     }
-
-
 
     // TRANSACTION NUMBER
     public static void addTransactionID(int transactionID) {
@@ -49,6 +38,11 @@ public class TransactionManager {
         int i;
         boolean found = false;
 
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
+                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+
         for (i = 0; i < TransactionID.size(); i++) {
             if (TransactionID.get(i) == transactionID) {
                 printReceipt(i);
@@ -59,6 +53,9 @@ public class TransactionManager {
         if (!found) {
             errorNoTransactionFound();
         }
+
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.println();
     }
 
     // ROOM TYPE
@@ -72,6 +69,11 @@ public class TransactionManager {
         int i;
         boolean found = false;
 
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
+                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+
         for (i = 0; i < RoomType.size(); i++) {
             if (RoomType.get(i).equalsIgnoreCase(roomType)) {
                 printReceipt(i);
@@ -82,6 +84,9 @@ public class TransactionManager {
         if (!found) {
             errorNoTransactionFound();
         }
+
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.println();
     }
 
     // ROOM OCCUPANCY
@@ -96,6 +101,11 @@ public class TransactionManager {
         int i;
         boolean found = false;
 
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
+                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+
         for (i = 0; i < RoomType.size(); i++) {
             if (RoomType.get(i).equalsIgnoreCase(roomType) && RoomOcc.get(i).equalsIgnoreCase(roomOcc)) {
                 printReceipt(i);
@@ -106,6 +116,9 @@ public class TransactionManager {
         if (!found) {
             errorNoTransactionFound();
         }
+
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.println();
     }
 
 
@@ -136,6 +149,11 @@ public class TransactionManager {
         int i;
         boolean found = false;
 
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
+                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+
         for (i = 0; i < Name.size(); i++) {
             if (Name.get(i).toLowerCase().contains(names.toLowerCase())) {
                 printReceipt(i);
@@ -146,6 +164,9 @@ public class TransactionManager {
         if (!found) {
             errorNoTransactionFound();
         }
+
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.println();
     }
 
     // AGES
@@ -181,17 +202,17 @@ public class TransactionManager {
         }
 
         System.out.println();
-        System.out.println(BOLD+"======================================================================================================================================="+RESET);
-        System.out.printf(BOLD+"| %-12s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
-                        "Transaction ID", "Room Type", "Occupancy", "Nights Stayed", "Guests", "Name", "Age", "Contact No.", "Email"+RESET);
-        System.out.println(BOLD+"======================================================================================================================================="+RESET);
+        System.out.println(BOLD+"==================================================================================================================================================================="+RESET);
+        System.out.printf(BOLD+"| %-12s | %-10s | %-10s | %-13s | %-6s | %-40s | %-5s | %-13s | %-30s %n",
+                        "Transaction ID", "Room Type", "Occupancy", "Nights", "Guests", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"==================================================================================================================================================================="+RESET);
         for ( i = 0; i < TransactionID.size(); i++) {
-            System.out.printf("| %-14s | %-10s | %-10s | %-13s | %-6s | %-20s | %-5s | %-13s | %-25s %n",
+            System.out.printf("| %-14s | %-10s | %-10s | %-13s | %-6s | %-40s | %-5s | %-13s | %-30s %n",
                             TransactionID.get(i), RoomType.get(i), RoomOcc.get(i), NightCount.get(i), GuestCount.get(i),
                             Name.get(i), Age.get(i), Contact.get(i), Email.get(i));
-            System.out.println("______________________________________________________________________________________________________________________________________");                 
+            System.out.println("___________________________________________________________________________________________________________________________________________________________________");
         }
 
-        System.out.println("=======================================================================================================================================");
+        System.out.println("===================================================================================================================================================================");
     }
 }
