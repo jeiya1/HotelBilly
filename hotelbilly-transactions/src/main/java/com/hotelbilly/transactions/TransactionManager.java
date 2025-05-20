@@ -22,9 +22,19 @@ public class TransactionManager {
     private static final ArrayList<String> Email = new ArrayList<>();
 
     // ***RECEIPT***
-    private static void printReceipt(int index) {
-        System.out.printf("| %-14s | %-40s | %-5s | %-13s | %-30s %n",
-               TransactionID.get(index), Name.get(index), Age.get(index), Contact.get(index), Email.get(index));
+    private static void printReceipt(ArrayList<Integer> matched) {
+        int i;
+        System.out.println();
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
+                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        for (i = 0; i < matched.size(); i++) {
+            System.out.printf("| %-14s | %-40s | %-5s | %-13s | %-30s %n",
+                    TransactionID.get(matched.get(i)), Name.get(matched.get(i)), Age.get(matched.get(i)), Contact.get(matched.get(i)), Email.get(matched.get(i)));
+        }
+        System.out.println(BOLD+"================================================================================================================"+RESET);
+        System.out.println();
     }
 
     // TRANSACTION NUMBER
@@ -36,26 +46,17 @@ public class TransactionManager {
     }
     public static void findByTransactionID(int transactionID) {
         int i;
-        boolean found = false;
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
-                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
-        System.out.println(BOLD+"================================================================================================================"+RESET);
 
         for (i = 0; i < TransactionID.size(); i++) {
-            if (TransactionID.get(i) == transactionID) {
-                printReceipt(i);
-                found = true;
+            if (TransactionID.get(i).equals(transactionID)) {
+                ArrayList<Integer> matched = new ArrayList<>();
+                matched.add(i);
+                printReceipt(matched);
+                return;
             }
         }
 
-        if (!found) {
-            errorNoTransactionFound();
-        }
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.println();
+        errorNoTransactionFound();
     }
 
     // ROOM TYPE
@@ -67,26 +68,19 @@ public class TransactionManager {
     }
     public static void findByRoomType(String roomType) {
         int i;
-        boolean found = false;
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
-                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
-        System.out.println(BOLD+"================================================================================================================"+RESET);
+        ArrayList<Integer> matched = new ArrayList<>();
 
         for (i = 0; i < RoomType.size(); i++) {
             if (RoomType.get(i).equalsIgnoreCase(roomType)) {
-                printReceipt(i);
-                found = true;
+                matched.add(i);
             }
         }
 
-        if (!found) {
+        if (matched.isEmpty()) {
             errorNoTransactionFound();
+        } else {
+            printReceipt(matched);
         }
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.println();
     }
 
     // ROOM OCCUPANCY
@@ -99,26 +93,19 @@ public class TransactionManager {
     // FIND ROOM TYPE AND OCCUPANCY
     public static void findByRoomTypeOcc(String roomType, String roomOcc) {
         int i;
-        boolean found = false;
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
-                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
-        System.out.println(BOLD+"================================================================================================================"+RESET);
+        ArrayList<Integer> matched = new ArrayList<>();
 
         for (i = 0; i < RoomType.size(); i++) {
             if (RoomType.get(i).equalsIgnoreCase(roomType) && RoomOcc.get(i).equalsIgnoreCase(roomOcc)) {
-                printReceipt(i);
-                found = true;
+                matched.add(i);
             }
         }
 
-        if (!found) {
+        if (matched.isEmpty()) {
             errorNoTransactionFound();
+        } else {
+            printReceipt(matched);
         }
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.println();
     }
 
 
@@ -147,26 +134,19 @@ public class TransactionManager {
     }
     public static void findByName(String names) {
         int i;
-        boolean found = false;
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.printf(BOLD+"| %-14s | %-40s | %-5s | %-13s | %-3s %n",
-                "Transaction ID", "Name", "Age", "Contact No.", "Email"+RESET);
-        System.out.println(BOLD+"================================================================================================================"+RESET);
+        ArrayList<Integer> matched = new ArrayList<>();
 
         for (i = 0; i < Name.size(); i++) {
             if (Name.get(i).toLowerCase().contains(names.toLowerCase())) {
-                printReceipt(i);
-                found = true;
+                matched.add(i);
             }
         }
 
-        if (!found) {
+        if (matched.isEmpty()) {
             errorNoTransactionFound();
+        } else {
+            printReceipt(matched);
         }
-
-        System.out.println(BOLD+"================================================================================================================"+RESET);
-        System.out.println();
     }
 
     // AGES
@@ -199,6 +179,7 @@ public class TransactionManager {
 
         if (TransactionID.isEmpty()) {
             errorNoTransactionFound();
+            return;
         }
 
         System.out.println();
@@ -210,7 +191,6 @@ public class TransactionManager {
             System.out.printf("| %-14s | %-10s | %-10s | %-13s | %-6s | %-40s | %-5s | %-13s | %-30s %n",
                             TransactionID.get(i), RoomType.get(i), RoomOcc.get(i), NightCount.get(i), GuestCount.get(i),
                             Name.get(i), Age.get(i), Contact.get(i), Email.get(i));
-            System.out.println("___________________________________________________________________________________________________________________________________________________________________");
         }
 
         System.out.println("===================================================================================================================================================================");

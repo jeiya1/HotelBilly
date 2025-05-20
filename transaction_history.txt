@@ -1,0 +1,110 @@
+ID: 1
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: joseph
+Age: 19
+Contact: 9345849
+Email: 2904529058
+==============================
+ID: 2
+Type: Standard
+Occupancy: Double
+Guests: 3
+Nights: 3
+Name: albert
+Age: 45
+Contact: 12452562
+Email: 24lklakgjklag
+==============================
+ID: 3
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: 1
+Age: 123
+Contact: 151451451
+Email: 14523534532
+==============================
+ID: 4
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: 1
+Age: 112
+Contact: 121242345
+Email: 15512345245
+==============================
+ID: 5
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: joseph
+Age: 123
+Contact: 51515154
+Email: 2345235423
+==============================
+ID: 6
+Type: Standard
+Occupancy: Double
+Guests: 1
+Nights: 1
+Name: Joseph Ericson DC Aniag
+Age: 24
+Contact: 15145145234
+Email: 45234523564
+==============================
+ID: 7
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: Albert Delos Reyes
+Age: 45
+Contact: 25145435
+Email: 1523452345
+==============================
+ID: 8
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: Joseph Ericson DC Aniag
+Age: 34
+Contact: 15435252
+Email: 4asfdkljasfjklaf
+==============================
+ID: 9
+Type: Suite
+Occupancy: Single
+Guests: 3
+Nights: 5
+Name: Albert Delos Reyes
+Age: 55
+Contact: 3452356256
+Email: aslkdfaslkdfjas
+==============================
+ID: 10
+Type: Standard
+Occupancy: Single
+Guests: 1
+Nights: 1
+Name: Joseph Ericson DC Aniag
+Age: 22
+Contact: 3452245621
+Email: lsadflksaf
+==============================
+ID: 11
+Type: Suite
+Occupancy: Single
+Guests: 3
+Nights: 6
+Name: Albert Delos Reyes
+Age: 99
+Contact: 459898590
+Email: lasdflakfjl
+==============================
